@@ -256,7 +256,7 @@ function drawScene(){
   const packP = mode === "pack" ? Number(progressEl.value) : 1 - Number(progressEl.value);
   const built = buildTiles(packP);
   const bounds = sceneBounds(packP);
-  const endPadding = lerp(0.66, 0.56, smoothstep(0.76, 1, packP));
+  const endPadding = lerp(0.66, 0.61, smoothstep(0.76, 1, packP));
   const targetScale = Math.min(W * endPadding / bounds.width, H * endPadding / bounds.height) * Number(zoomEl.value);
   const originX = W * 0.52, originY = H * 0.54;
   drawFloorGlow(W,H,originX,originY,targetScale,bounds.spatialFootprint);
