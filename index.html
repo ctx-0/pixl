@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <div class="control-card">
+  <div class="control-card" id="controlCard">
     <div class="card-top">
       <div class="meta">
         <div class="label">Current mapping</div>
@@ -58,35 +58,38 @@
       <div class="actions">
         <button id="playBtn" class="iconbtn" title="Play" aria-label="Play">▶</button>
         <button id="resetBtn" class="iconbtn" title="Reset" aria-label="Reset">↺</button>
+        <button id="collapseBtn" class="iconbtn collapse-btn" title="Collapse controls" aria-label="Collapse controls" aria-expanded="true" aria-controls="controlCardBody">−</button>
       </div>
     </div>
 
-    <div class="segmented">
-      <button id="packBtn" class="active">Unshuffle</button>
-      <button id="unpackBtn">Shuffle</button>
-    </div>
-
-    <div class="preset-block">
-      <div class="preset-label">Image</div>
-      <div class="preset-strip" id="presetStrip"></div>
-    </div>
-
-    <div class="status" id="stageCopy">Space-to-depth Blue — original spatial image.</div>
-
-    <div class="scrub">
-      <div class="rail-wrap">
-        <div class="rail"></div>
-        <div class="fill" id="fill"></div>
-        <input id="progress" type="range" min="0" max="1" step="0.001" value="0.20" />
+    <div class="control-card-body" id="controlCardBody">
+      <div class="segmented">
+        <button id="packBtn" class="active">Unshuffle</button>
+        <button id="unpackBtn">Shuffle</button>
       </div>
-      <div class="stage-dots" id="stageNodes"></div>
-    </div>
 
-    <div class="card-bottom">
-      <div class="tiny-pill" id="modePill">pack · manual</div>
-      <div class="right">
-        <button id="orbitBtn">Orbit</button>
-        <button id="cameraBtn">Camera</button>
+      <div class="preset-block">
+        <div class="preset-label">Image</div>
+        <div class="preset-strip" id="presetStrip"></div>
+      </div>
+
+      <div class="status" id="stageCopy">Space-to-depth Blue — original spatial image.</div>
+
+      <div class="scrub">
+        <div class="rail-wrap">
+          <div class="rail"></div>
+          <div class="fill" id="fill"></div>
+          <input id="progress" type="range" min="0" max="1" step="0.001" value="0.20" />
+        </div>
+        <div class="stage-dots" id="stageNodes"></div>
+      </div>
+
+      <div class="card-bottom">
+        <div class="tiny-pill" id="modePill">pack · manual</div>
+        <div class="right">
+          <button id="orbitBtn">Orbit</button>
+          <button id="cameraBtn">Camera</button>
+        </div>
       </div>
     </div>
   </div>

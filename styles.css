@@ -51,8 +51,12 @@
     position:absolute; right:20px; bottom:20px; width:320px; max-width:calc(100vw - 32px);
     padding:12px; border-radius:22px; background:var(--panel); border:1px solid var(--line-strong);
     backdrop-filter:blur(16px); box-shadow:0 22px 70px rgba(0,0,0,.34);
+    max-height:calc(100dvh - 40px); display:flex; flex-direction:column;
   }
-  .card-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;}
+  .card-top{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-shrink:0;}
+  .control-card-body{min-height:0; margin-top:10px; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:thin;}
+  .control-card.collapsed .control-card-body{display:none;}
+  .control-card.collapsed{width:min(320px, calc(100vw - 32px));}
   .meta{min-width:0; display:flex; flex-direction:column; gap:3px;}
   .meta .label{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:rgba(238,242,248,.46);}
   .meta .shape{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:11px; color:rgba(238,242,248,.88); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:170px;}
@@ -66,6 +70,7 @@
   button:hover{border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.065);}
   button.active{background:rgba(241,200,107,.12); border-color:rgba(241,200,107,.26); color:#fff6de;}
   .iconbtn{width:34px; height:34px; padding:0; display:grid; place-items:center; border-radius:12px; font-size:13px;}
+  .collapse-btn{font-size:18px;}
   .segmented{display:flex; gap:4px; padding:4px; margin-bottom:10px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:15px;}
   .segmented button{flex:1; background:transparent; border:1px solid transparent; padding:8px 10px; border-radius:11px; color:rgba(238,242,248,.68);}
   .segmented button.active{background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.08); color:var(--text);}
@@ -130,7 +135,53 @@
     .figure-title{left:12px; top:12px; max-width:calc(100vw - 24px);}
     .figure-title .path{padding:8px 10px; gap:6px; overflow:auto hidden; scrollbar-width:none;}
     .figure-title .path::-webkit-scrollbar{display:none}
-    .control-card{right:12px; bottom:12px; left:12px; width:auto; max-width:none;}
-    .camera-pop{right:12px; left:12px; width:auto; max-width:none; bottom:374px;}
+    .control-card{
+      right:max(12px, env(safe-area-inset-right)); bottom:max(12px, env(safe-area-inset-bottom));
+      left:max(12px, env(safe-area-inset-left)); width:auto; max-width:none; max-height:calc(100dvh - 96px);
+      padding:8px; border-radius:16px;
+    }
+    .control-card.collapsed{
+      right:auto; left:50%; width:min(280px, calc(100vw - 24px));
+      transform:translateX(-50%);
+      padding:7px 8px;
+    }
+    .control-card.collapsed .meta .label{display:none;}
+    .control-card-body{margin-top:6px; padding-right:2px;}
+    .camera-pop{
+      right:max(12px, env(safe-area-inset-right)); left:max(12px, env(safe-area-inset-left));
+      top:76px; bottom:auto; width:auto; max-width:none; max-height:calc(100dvh - 164px); overflow-y:auto;
+    }
     .meta .shape{max-width:none}
+    .meta .label{font-size:9px;}
+    button{min-height:36px; padding:8px 10px;}
+    .iconbtn{width:36px; height:36px;}
+    .actions{gap:4px;}
+    .segmented{margin-bottom:7px; padding:3px;}
+    .segmented button{padding:7px 9px;}
+    .preset-block{margin-bottom:7px;}
+    .preset-label{font-size:9px; margin-bottom:5px;}
+    .preset-strip{gap:5px;}
+    .preset-btn{padding:5px 4px; gap:4px;}
+    .preset-thumb{width:36px; height:36px; border-radius:8px;}
+    .preset-name{font-size:9px;}
+    .status{font-size:10px; margin-bottom:6px; min-height:13px; white-space:nowrap;}
+    .scrub{margin-bottom:6px;}
+    .rail-wrap{height:22px;}
+    .rail,.fill{top:10px;}
+    #progress{height:22px;}
+    #progress::-webkit-slider-thumb{margin-top:-7px; width:18px; height:18px;}
+    #progress::-moz-range-thumb{width:18px; height:18px;}
+    .stage-dots{gap:4px; margin-top:3px;}
+    .stage-node{min-height:34px; gap:4px; justify-content:center;}
+    .stage-node .label{font-size:8px;}
+    .card-bottom{margin-top:6px;}
+    .tiny-pill{padding:6px 8px;}
+  }
+
+  @media (max-width: 390px){
+    .meta .shape{font-size:10px;}
+    .card-bottom{align-items:stretch;}
+    .tiny-pill{display:none;}
+    .card-bottom .right{width:100%;}
+    .card-bottom .right button{flex:1;}
   }

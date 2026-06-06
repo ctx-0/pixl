@@ -16,6 +16,8 @@ const orbitBtn = E("orbitBtn");
 const cameraBtn = E("cameraBtn");
 const cameraPopover = E("cameraPopover");
 const camState = E("camState");
+const controlCard = E("controlCard");
+const collapseBtn = E("collapseBtn");
 
 const stageCopy = E("stageCopy");
 const shapeCopy = E("shapeCopy");
@@ -337,10 +339,20 @@ function toggleCameraPopover(force){
   const open = force !== undefined ? force : !cameraPopover.classList.contains("open");
   cameraPopover.classList.toggle("open", open);
 }
+function setControlCardCollapsed(collapsed, persist = true){
+  controlCard.classList.toggle("collapsed", collapsed);
+  collapseBtn.setAttribute("aria-expanded", String(!collapsed));
+  collapseBtn.setAttribute("aria-label", collapsed ? "Expand controls" : "Collapse controls");
+  collapseBtn.title = collapsed ? "Expand controls" : "Collapse controls";
+  collapseBtn.textContent = collapsed ? "+" : "−";
+  if(collapsed) toggleCameraPopover(false);
+  if(persist) localStorage.setItem("pixl-controls-collapsed", String(collapsed));
+}
 
 packBtn.addEventListener("click", ()=>setMode("pack"));
 unpackBtn.addEventListener("click", ()=>setMode("unpack"));
 playBtn.addEventListener("click", ()=>setPaused(playing));
+collapseBtn.addEventListener("click", ()=>setControlCardCollapsed(!controlCard.classList.contains("collapsed")));
 resetBtn.addEventListener("click", ()=>{
   progressEl.value = 0.20;
   yawEl.value = 0.72;
@@ -404,6 +416,9 @@ function animate(ts){
 resize();
 setupNodes();
 setupPresets();
+const savedCollapsed = localStorage.getItem("pixl-controls-collapsed");
+const isMobile = window.matchMedia("(max-width: 740px)").matches;
+setControlCardCollapsed(isMobile || savedCollapsed === "true", false);
 setMode("pack");
 setPaused(true);
 drawScene();
