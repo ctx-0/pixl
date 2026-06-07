@@ -51,7 +51,7 @@ const PRESET_MANIFEST = {
   }
 };
 const PRESETS = {};
-let currentPreset = "taco";
+let currentPreset = "red";
 let base = [];
 let mode = "pack";
 let playing = false;
@@ -254,8 +254,8 @@ function drawFloorGlow(W,H,x,y,scale,extent){
 }
 
 function drawAxes(W, H){
-  const originX = Math.min(94, W - 56);
-  const originY = Math.max(78, H - 86);
+  const originX = Math.min(42, W - 56);
+  const originY = Math.max(78, H - 132);
   const axisScale = 1.35;
   const origin = project(0, 0, 0);
   const axes = [
